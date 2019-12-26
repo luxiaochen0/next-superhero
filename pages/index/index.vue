@@ -11,10 +11,42 @@
 				<image :src="carousel.image" mode="" class="carousel"></image>
 			</swiper-item>
 		</swiper>
+		
+		<view class="page-block super-hot">
+			<view class="hot-title-wapper">
+				<image src="../../static/icos/hot.png" mode="" class="hot-ico"></image>
+				<view class="hot-title">
+					热门
+				</view>
+			</view>
+		</view>
+		
+		<scroll-view scroll-x="true" class="page-block hot">
+			<view class="single-poster">
+				<view class="poster-wapper">
+					<image src="../../static/poster/civilwar.jpg" mode="" class="poster"></image>
+					<view class="movie-name">
+						蝙蝠侠蝙蝠侠蝙蝠侠
+					</view>
+					<view class="movie-score-wapper">
+						<image src="../../static/icos/star-yellow.png" mode="" class="star-ico"></image>
+						<image src="../../static/icos/star-yellow.png" mode="" class="star-ico"></image>
+						<image src="../../static/icos/star-yellow.png" mode="" class="star-ico"></image>
+						<image src="../../static/icos/star-yellow.png" mode="" class="star-ico"></image>
+						<image src="../../static/icos/star-gray.png" mode="" class="star-ico"></image>
+						<view class="movie-score">
+							9.0
+						</view>
+					</view>
+				</view>
+			</view>
+		</scroll-view>
+		
 	</view>
 </template>
 
 <script>
+	import common from "../../common/common.js"
 	export default {
 		data() {
 			return {
@@ -23,9 +55,10 @@
 		},
 		onLoad() {
 			//var _this=this;
+			var serverUrl=common.serverUrl;
 			//请求轮播图数据
 			uni.request({
-			    url: 'https://next-hero.oss-cn-shanghai.aliyuncs.com/json/index-carousel-list.json', 
+			    url: serverUrl+'/index-carousel-list.json', 
 			    method:"GET",
 				success: (res) => {//箭头函数不需要_this
 			        console.log(res.data);
