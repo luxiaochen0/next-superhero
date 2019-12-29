@@ -1,8 +1,0 @@
-http://122.152.205.72:88/superhero/MARVEL/AntMan2/poster.png
-http://122.152.205.72:88/superhero/MARVEL/AntMan2/cover.png
-http://122.152.205.72:88/superhero/MARVEL/AntMan2/trailer.mp4
-http://122.152.205.72:88/superhero/MARVEL/AntMan2/photos/1.png
-http://122.152.205.72:88/superhero/MARVEL/AntMan2/photos/2.png
-http://122.152.205.72:88/superhero/MARVEL/AntMan2/photos/3.png
-http://122.152.205.72:88/superhero/MARVEL/AntMan2/photos/4.png
-http://122.152.205.72:88/superhero/MARVEL/AntMan2/photos/5.png
