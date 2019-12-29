@@ -55,18 +55,3 @@
 	text-overflow: ellipsis;
 }
 
-.movie-score-wapper{
-	display: flex;
-}
-
-.star-ico{
-	width: 20upx;
-	height: 20upx;
-	margin-top: 6upx;
-}
-
-.movie-score{
-	font-size: 12upx;
-	color: grey;
-	margin-left: 8upx;
-}

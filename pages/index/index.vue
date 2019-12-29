@@ -22,22 +22,13 @@
 		</view>
 		
 		<scroll-view scroll-x="true" class="page-block hot">
-			<view class="single-poster">
+			<view class="single-poster" v-for="(superhero,index) in hotSuperheroList" :key=index>
 				<view class="poster-wapper">
-					<image src="../../static/poster/civilwar.jpg" mode="" class="poster"></image>
+					<image :src="superhero.cover" mode="" class="poster"></image>
 					<view class="movie-name">
-						蝙蝠侠蝙蝠侠蝙蝠侠
+						{{superhero.name}}
 					</view>
-					<view class="movie-score-wapper">
-						<image src="../../static/icos/star-yellow.png" mode="" class="star-ico"></image>
-						<image src="../../static/icos/star-yellow.png" mode="" class="star-ico"></image>
-						<image src="../../static/icos/star-yellow.png" mode="" class="star-ico"></image>
-						<image src="../../static/icos/star-yellow.png" mode="" class="star-ico"></image>
-						<image src="../../static/icos/star-gray.png" mode="" class="star-ico"></image>
-						<view class="movie-score">
-							9.0
-						</view>
-					</view>
+					<trailerStars innerScore="10"></trailerStars>
 				</view>
 			</view>
 		</scroll-view>
@@ -47,10 +38,13 @@
 
 <script>
 	import common from "../../common/common.js"
+	import trailerStars from "../../components/trailerStars.vue"
 	export default {
+		components:{trailerStars},
 		data() {
 			return {
-				carouselList: []
+				carouselList: [],
+				hotSuperheroList:[]
 			}
 		},
 		onLoad() {
@@ -61,10 +55,23 @@
 			    url: serverUrl+'/index-carousel-list.json', 
 			    method:"GET",
 				success: (res) => {//箭头函数不需要_this
-			        console.log(res.data);
+			        //console.log(res.data);
 					if(res.data.status==200){
 						var carouselList=res.data.data;
 						this.carouselList=carouselList;
+					}
+			    }
+			});
+			
+			//查询热门
+			uni.request({
+			    url: serverUrl+'/index-movie-hot-superhero.json', 
+			    method:"GET",
+				success: (res) => {//箭头函数不需要_this
+			        //console.log(res.data);
+					if(res.data.status==200){
+						var hotSuperheroList=res.data.data;
+						this.hotSuperheroList=hotSuperheroList;
 					}
 			    }
 			});
