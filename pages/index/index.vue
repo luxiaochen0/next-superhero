@@ -138,24 +138,39 @@
 			    }
 			});
 			
-			//查询猜你喜欢
-			uni.request({
-			    url: serverUrl+'/index-guessULike.json', 
-			    method:"GET",
-				success: (res) => {//箭头函数不需要_this
-			        //console.log(res.data);
-					if(res.data.status==200){
-						var guessULikeList=res.data.data;
-						this.guessULikeList=guessULikeList;
-					}
-			    }
-			});
+			this.refresh();
+			
 		},
 		onUnload() {
 			this.animationData={};
 			this.animationDataArr=[{},{},{},{},{}];
 		},
+		onPullDownRefresh() {
+			this.refresh();
+		},
 		methods: {
+			refresh(){
+				uni.showLoading({
+					mask:true
+				})
+				
+				var serverUrl=common.serverUrl;
+				//查询猜你喜欢
+				uni.request({
+				    url: serverUrl+'/index-guessULike.json', 
+				    method:"GET",
+					success: (res) => {//箭头函数不需要_this
+				        //console.log(res.data);
+						if(res.data.status==200){
+							var guessULikeList=res.data.data;
+							this.guessULikeList=guessULikeList;
+						}
+				    },complete() {
+						uni.hideLoading();
+				    	uni.stopPullDownRefresh();
+				    }
+				});
+			},
 			praseMe(e){				
 				var gIndex = e.currentTarget.dataset.gindex;
 				console.log(gIndex);

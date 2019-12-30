@@ -5,7 +5,8 @@
 			"style": {
 				"app-plus":{
 					"titleNView":false
-				}
+				},
+				"enablePullDownRefresh":true
 			}
 		}
 	    ,{
