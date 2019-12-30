@@ -10,7 +10,10 @@
 		</view> -->
 		
 		<image v-for="(yello,index) in yelloScore" :key="index" src="../../static/icos/star-yellow.png" mode="" class="star-ico"></image>
-		<image v-for="(gray,index) in grayScore" :key="index" src="../../static/icos/star-gray.png" mode="" class="star-ico"></image>
+		<image v-for="(gray,index) in grayScore" :key="'grey-'+index" src="../../static/icos/star-gray.png" mode="" class="star-ico"></image>
+		<view class="movie-score" v-if="showNum==1">
+			{{innerScore}}
+		</view>
 	</view>
 </template>
 
@@ -30,7 +33,7 @@
 		//组件创建完成后
 		created() {
 			var tempScore=0;
-			if(this.innerScore!=null&&this.innerScore!=undefined){
+			if(this.innerScore!=null&&this.innerScore!=undefined&&this.innerScore!=''){
 				tempScore=this.innerScore;
 			}
 			
@@ -54,7 +57,7 @@
 }
 
 .movie-score{
-	font-size: 12upx;
+	font-size: 12px;
 	color: grey;
 	margin-left: 8upx;
 }

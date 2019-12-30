@@ -7,7 +7,7 @@
 			<swiper-item>
 				<image src="../../static/carousel/spiderman.png" mode=""></image>
 			</swiper-item> -->
-			<swiper-item v-for="(carousel,index) in carouselList" :key=index>
+			<swiper-item v-for="(carousel,index) in carouselList" :key="index">
 				<image :src="carousel.image" mode="" class="carousel"></image>
 			</swiper-item>
 		</swiper>
@@ -22,16 +22,59 @@
 		</view>
 		
 		<scroll-view scroll-x="true" class="page-block hot">
-			<view class="single-poster" v-for="(superhero,index) in hotSuperheroList" :key=index>
+			<view class="single-poster" v-for="(superhero,index) in hotSuperheroList" :key="index">
 				<view class="poster-wapper">
 					<image :src="superhero.cover" mode="" class="poster"></image>
 					<view class="movie-name">
 						{{superhero.name}}
 					</view>
-					<trailerStars innerScore="10"></trailerStars>
+					<trailerStars :innerScore="superhero.score" showNum="1"></trailerStars>
 				</view>
 			</view>
 		</scroll-view>
+		
+		<view class="page-block super-hot">
+			<view class="hot-title-wapper">
+				<image src="../../static/icos/interest.png" mode="" class="hot-ico"></image>
+				<view class="hot-title">
+					热门预告
+				</view>
+			</view>
+		</view>
+		
+		<view class="hot-movies page-block">
+			<video :src="trailer.trailer" controls v-for="(trailer,index) in hotTrailerList" :key="index" :poster="trailer.poster" class="hot-movie-single"></video>
+		</view>
+		
+		<view class="page-block super-hot">
+			<view class="hot-title-wapper">
+				<image src="../../static/icos/guess-u-like.png" mode="" class="hot-ico"></image>
+				<view class="hot-title">
+					猜你喜欢
+				</view>
+			</view>
+		</view>
+		
+		<view class="page-block guess-u-like">
+			<view class="single-like-movie" v-for="(guess,gindex) in guessULikeList" :key="gindex">
+				<image :src="guess.cover" mode="" class="like-movie"></image>
+				<view class="movie-desc">
+					<view class="movie-title">{{guess.name}}</view>
+					<trailerStars :innerScore="9.1" showNum="0"></trailerStars>
+					<view class="movie-info">{{guess.basicInfo}}</view>
+					<view class="movie-info">{{guess.releaseDate}}</view>
+				</view>
+				<view class="movie-oper" @click="praseMe" :data-gindex="gindex">
+					<image src="../../static/icos/praise.png" mode="" class="praise-ico"></image>
+					<view class="praise-me">
+						点赞
+					</view>
+					<view :animation="animationDataArr[gindex]" class="praise-me animation-opacity">
+						+1
+					</view>
+				</view>
+			</view>
+		</view>
 		
 	</view>
 </template>
@@ -44,10 +87,17 @@
 		data() {
 			return {
 				carouselList: [],
-				hotSuperheroList:[]
+				hotSuperheroList:[],
+				hotTrailerList:[],
+				guessULikeList:[],
+				animationData:{},
+				animationDataArr:[{},{},{},{},{}],
 			}
 		},
 		onLoad() {
+			this.animation=uni.createAnimation();
+			
+			
 			//var _this=this;
 			var serverUrl=common.serverUrl;
 			//请求轮播图数据
@@ -75,9 +125,49 @@
 					}
 			    }
 			});
+			//查询热门 预告
+			uni.request({
+			    url: serverUrl+'/index-movie-hot-trailer.json', 
+			    method:"GET",
+				success: (res) => {//箭头函数不需要_this
+			        //console.log(res.data);
+					if(res.data.status==200){
+						var hotTrailerList=res.data.data;
+						this.hotTrailerList=hotTrailerList;
+					}
+			    }
+			});
+			
+			//查询猜你喜欢
+			uni.request({
+			    url: serverUrl+'/index-guessULike.json', 
+			    method:"GET",
+				success: (res) => {//箭头函数不需要_this
+			        //console.log(res.data);
+					if(res.data.status==200){
+						var guessULikeList=res.data.data;
+						this.guessULikeList=guessULikeList;
+					}
+			    }
+			});
+		},
+		onUnload() {
+			this.animationData={};
 		},
 		methods: {
-
+			praseMe(e){
+				var gindex=e.currentTarget.dataset.gindex;
+				console.log(gindex);
+				
+				this.animation.translateY(-60).opacity(1).step({duration:400})
+				this.animationData=this.animation;
+				this.animationDataArr[gindex]=this.animationData.export();
+				setTimeout(function() {
+					this.animation.translateY(0).opacity(0).step({duration:0});
+					this.animationData=this.animation;
+					this.animationDataArr[gindex]=this.animationData.export();
+				}.bind(this), 500);
+			}
 		}
 	}
 </script>
