@@ -1,0 +1,5 @@
+{
+    "require": {
+        "aliyun/aliyun-tablestore-sdk-php": "^5.0"
+    }
+}
