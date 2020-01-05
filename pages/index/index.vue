@@ -56,7 +56,7 @@
 		</view>
 		
 		<view class="page-block guess-u-like">
-			<view class="single-like-movie" v-for="(guess,gindex) in guessULikeList" :key="gindex">
+			<view class="single-like-movie" v-for="(guess,gIndex) in guessULikeList" :key="gIndex">
 				<image :src="guess.cover" mode="" class="like-movie"></image>
 				<view class="movie-desc">
 					<view class="movie-title">{{guess.name}}</view>
@@ -64,12 +64,12 @@
 					<view class="movie-info">{{guess.basicInfo}}</view>
 					<view class="movie-info">{{guess.releaseDate}}</view>
 				</view>
-				<view class="movie-oper" @click="praseMe" :data-gindex="gindex">
+				<view class="movie-oper" @click="praseMe" :data-gIndex="gIndex">
 					<image src="../../static/icos/praise.png" mode="" class="praise-ico"></image>
 					<view class="praise-me">
 						点赞
 					</view>
-					<view :animation="animationDataArr[gindex]" class="praise-me animation-opacity">
+					<view :animation="animationDataArr[gIndex]" class="praise-me animation-opacity">
 						+1
 					</view>
 				</view>
@@ -153,20 +153,23 @@
 		},
 		onUnload() {
 			this.animationData={};
+			this.animationDataArr=[{},{},{},{},{}];
 		},
 		methods: {
-			praseMe(e){
-				var gindex=e.currentTarget.dataset.gindex;
-				console.log(gindex);
+			praseMe(e){				
+				var gIndex = e.currentTarget.dataset.gindex;
+				console.log(gIndex);
 				
 				this.animation.translateY(-60).opacity(1).step({duration:400})
-				this.animationData=this.animation;
-				this.animationDataArr[gindex]=this.animationData.export();
+				this.animationData = this.animation;
+				this.$set(this.animationDataArr,gIndex,this.animationData.export());
 				setTimeout(function() {
 					this.animation.translateY(0).opacity(0).step({duration:0});
 					this.animationData=this.animation;
-					this.animationDataArr[gindex]=this.animationData.export();
+					this.$set(this.animationDataArr,gIndex,this.animationData.export());
 				}.bind(this), 500);
+				
+				console.log(this.animationDataArr)
 			}
 		}
 	}
