@@ -47,8 +47,6 @@ function handler($request, $context): Response{
 
     $path=str_replace('/','',$path);
 
-
-
     try {
         $app=new App();
         $data=$app->$path();
