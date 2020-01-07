@@ -51,6 +51,14 @@ class App
         return $result;
     }
 
+    public function indexCarouselList(){
+        $otsClient=TableStore::getInstance();
+        return $otsClient->batchGetRow([
+            'table_name' => 'superhero',
+            'primary_keys'=>[[['id','marvel-1011']],[['id','xman-1004']],[['id','dc-1011']],[['id','dc-1005']],[['id','dc-1008']],[['id','marvel-1022']]],
+            'max_versions'=>1
+        ]);
+    }
 
 //    public function test(){
 //        return $otsClient->getRow([

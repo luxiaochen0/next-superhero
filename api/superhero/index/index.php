@@ -34,7 +34,7 @@ function handler($request, $context): Response{
     //     'hello world'
     // );
 
-    if(getenv('local')==1){
+    if(getenv('local')){
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__,'.env.dev');
     }else{
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__,'.env.prod');
