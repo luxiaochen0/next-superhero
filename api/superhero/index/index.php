@@ -1,7 +1,7 @@
 <?php
 
+require 'vendor/autoload.php';
 require 'TableStore.php';
-
 require 'App.php';
 
 use Aliyun\OTS\OTSClient;
@@ -33,6 +33,9 @@ function handler($request, $context): Response{
     //     ),
     //     'hello world'
     // );
+
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    $dotenv->load();
 
     $path       = $request->getAttribute('path');
 
