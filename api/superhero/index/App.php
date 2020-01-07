@@ -15,16 +15,12 @@ class App
 
     public function init()
     {
-        $data_json= file_get_contents("./json/all.json");
+        //return __DIR__."/json/all.json";
+
+        $data_json= file_get_contents(__DIR__."/json/all.json");
         $data = json_decode($data_json, true);
 
         $otsClient=TableStore::getInstance();
-
-        return $otsClient->getRow([
-            'table_name' => 'superhero',
-            'primary_key'=>[['id','xman-1010']],
-            'max_versions'=>1
-        ]);
 
         foreach ($data['data']['rows'] as $key=>$value){
             $result[]=$otsClient->putRow(
@@ -54,4 +50,15 @@ class App
 
         return $result;
     }
+
+
+//    public function test(){
+//        return $otsClient->getRow([
+//            'table_name' => 'superhero',
+//            'primary_key'=>[['id','xman-1010']],
+//            'max_versions'=>1
+//        ]);
+//    }
+
+
 }
