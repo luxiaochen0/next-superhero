@@ -18,10 +18,7 @@ Resources:
         MemorySize: 512.0
         Timeout: 60.0
         EnvironmentVariables:
-          LD_LIBRARY_PATH: /code/.fun/root/usr/lib:/code/.fun/root/usr/lib/x86_64-linux-gnu:/code/.fun/root/lib/x86_64-linux-gnu:/code/.fun/root/usr/lib64:/code:/code/lib:/usr/local/lib
-          PATH: /code/.fun/root/usr/local/bin:/code/.fun/root/usr/local/sbin:/code/.fun/root/usr/bin:/code/.fun/root/usr/sbin:/code/.fun/root/sbin:/code/.fun/root/bin:/code/.fun/python/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/sbin:/bin
           PHP_INI_SCAN_DIR: /code/extension
-          PYTHONUSERBASE: /code/.fun/python
         CodeUri: .\superhero\index
       Events:
         index:
