@@ -34,7 +34,12 @@ function handler($request, $context): Response{
     //     'hello world'
     // );
 
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+    if(getenv('local')==1){
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__,'.env.dev');
+    }else{
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__,'.env.prod');
+    }
+
     $dotenv->load();
 
     $path       = $request->getAttribute('path');
