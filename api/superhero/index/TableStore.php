@@ -10,7 +10,7 @@ class TableStore
     private function __construct()
     {
         $otsClient = new OTSClient(array(
-            'EndPoint' => "http://superhero.cn-shanghai.ots.aliyuncs.com",
+            'EndPoint' => "https://superhero.cn-shanghai.ots.aliyuncs.com",
             'AccessKeyID' => "LTAI4FdG8crCbMjfz9PXwuwC",
             'AccessKeySecret' => "FF4eyFEbgBeXCpIztS3g2xzlxo2VmR",
             'InstanceName' => "superhero",

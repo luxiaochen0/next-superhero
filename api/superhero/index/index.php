@@ -1,11 +1,10 @@
 <?php
 
-require 'vendor/autoload.php';
 require 'TableStore.php';
 
 require 'App.php';
 
-use Aliyun\OTS\OTSServerException;
+use Aliyun\OTS\OTSClient;
 use RingCentral\Psr7\Response;
 
 /*
@@ -47,14 +46,8 @@ function handler($request, $context): Response{
 
     $path=str_replace('/','',$path);
 
-    try {
-        $app=new App();
-        $data=$app->$path();
-    } catch (OTSServerException $e) {
-        // 按照你的需要处理这个异常
-         $e->getOTSErrorCode();
-        $data=$e->getOTSErrorMessage();
-    }
+    $app=new App();
+    $data=$app->$path();
 
     return new Response(
         200,
