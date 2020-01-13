@@ -102,11 +102,11 @@
 			var serverUrl=common.serverUrl;
 			//请求轮播图数据
 			uni.request({
-			    url: serverUrl+'/index-carousel-list.json', 
+			    url: serverUrl+'/index/carousel', 
 			    method:"GET",
 				success: (res) => {//箭头函数不需要_this
 			        //console.log(res.data);
-					if(res.data.status==200){
+					if(res.data.code==200){
 						var carouselList=res.data.data;
 						this.carouselList=carouselList;
 					}

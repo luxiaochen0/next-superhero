@@ -1,4 +1,4 @@
-const serverUrl="https://next-hero.oss-cn-shanghai.aliyuncs.com/json";
+const serverUrl="http://dev.luxiaochen.com/next-superhero-api/web";
 
 export default{
 	serverUrl
