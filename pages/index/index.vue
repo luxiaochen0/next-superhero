@@ -115,11 +115,11 @@
 			
 			//查询热门
 			uni.request({
-			    url: serverUrl+'/index-movie-hot-superhero.json', 
+			    url: serverUrl+'/index/hot', 
 			    method:"GET",
 				success: (res) => {//箭头函数不需要_this
 			        //console.log(res.data);
-					if(res.data.status==200){
+					if(res.data.code==200){
 						var hotSuperheroList=res.data.data;
 						this.hotSuperheroList=hotSuperheroList;
 					}
@@ -127,11 +127,12 @@
 			});
 			//查询热门 预告
 			uni.request({
-			    url: serverUrl+'/index-movie-hot-trailer.json', 
+			    url: serverUrl+'/index/hot', 
 			    method:"GET",
+				data:{type:'trailer'},
 				success: (res) => {//箭头函数不需要_this
 			        //console.log(res.data);
-					if(res.data.status==200){
+					if(res.data.code==200){
 						var hotTrailerList=res.data.data;
 						this.hotTrailerList=hotTrailerList;
 					}
@@ -157,11 +158,11 @@
 				var serverUrl=common.serverUrl;
 				//查询猜你喜欢
 				uni.request({
-				    url: serverUrl+'/index-guessULike.json', 
+				    url: serverUrl+'/index/guess-u-like', 
 				    method:"GET",
 					success: (res) => {//箭头函数不需要_this
 				        //console.log(res.data);
-						if(res.data.status==200){
+						if(res.data.code==200){
 							var guessULikeList=res.data.data;
 							this.guessULikeList=guessULikeList;
 						}
