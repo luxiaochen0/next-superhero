@@ -166,7 +166,8 @@
 							var guessULikeList=res.data.data;
 							this.guessULikeList=guessULikeList;
 						}
-				    },complete() {
+				    },
+					complete:() => {
 						uni.hideLoading();
 				    	uni.stopPullDownRefresh();
 				    }

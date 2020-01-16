@@ -1,0 +1,47 @@
+.search-ico{
+	width: 40rpx;
+	height: 40rpx;
+}
+
+.search-text{
+	font-size: 14px;
+	background-color: #eaeaea;
+	height: 50rpx;
+	width: 650rpx;
+}
+
+.search-block{
+	display: flex;
+	padding: 0 20rpx 20rpx 20rpx;
+	
+	/* 固定搜索栏 */
+	position: fixed;
+	top: 100;
+	z-index: 200;
+	
+	background-color: #F8F8F8;
+	
+}
+.search-ico-wapper{
+	background-color: #eaeaea;
+	display: flex;
+	align-items: center;
+	padding: 0 10rpx;
+}
+
+
+.poster{
+	width: 200rpx;
+	height: 270rpx;
+}
+
+.movie-list{
+	display: flex;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+	padding: 100rpx 10rpx 0 10rpx;
+}
+
+.movie-wapper{
+	padding: 10rpx 20rpx;
+}
