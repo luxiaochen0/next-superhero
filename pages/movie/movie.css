@@ -1,0 +1,10 @@
+.player {
+	display: flex;
+	justify-content: center;
+	background-color: black;
+}
+
+.movie{
+	width: 100%;
+	height: 440rpx;
+}

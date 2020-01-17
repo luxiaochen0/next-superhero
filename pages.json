@@ -19,6 +19,10 @@
             "path" : "pages/me/me",
             "style" : {}
         }
+        ,{
+            "path" : "pages/movie/movie",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
