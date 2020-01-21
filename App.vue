@@ -24,4 +24,13 @@
 	.page-block{
 		background-color: #FFFFFF;
 	}
+	
+	.line-wapper{
+		padding: 0 20rpx;
+	}
+	
+	.line{
+		height: 1px;
+		background-color: #DBDBDA;
+	}
 </style>

@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<view class="page">
 		<view class="player">
 			<video :src="trailerInfo.trailer" :poster="trailerInfo.poster" class="movie" controls></video>
 		</view>
@@ -8,21 +8,46 @@
 			<image :src="trailerInfo.cover" model="" class="cover"></image>
 			<view class="movie-desc">
 				<view class="title">{{trailerInfo.name}}</view>
-				<view class="title">{{trailerInfo.basicInfo}}</view>
-				<view class="title">{{trailerInfo.originalName}}</view>
-				<view class="title">{{trailerInfo.totalTime}}</view>
-				<view class="title">{{trailerInfo.releaseDate}}</view>
+				<view class="basic-info">{{trailerInfo.basicInfo}}</view>
+				<view class="basic-info">{{trailerInfo.originalName}}</view>
+				<view class="basic-info">{{trailerInfo.totalTime}}</view>
+				<view class="basic-info">{{trailerInfo.releaseDate}}</view>
 				<view class="score-block">
-					
+					<view class="big-score">
+						<view class="score-words">综合评分:</view>
+						<view class="movie-score">{{trailerInfo.score}}</view>
+					</view>
+					<view class="score-stars">
+						<block v-if="trailerInfo.score>=0">
+							<trailerStars :innerScore="trailerInfo.score" showNum="0"></trailerStars>
+						</block>						
+						<view class="praise-counts">
+							{{trailerInfo.prisedCounts}} 人点赞
+						</view>
+					</view>
 				</view>
 			</view>
+		</view>
+		
+		<view class="line-wapper">
+			<view class="line">
+				
+			</view>
+			
+		</view>
+		
+		<view class="plots-block">
+			<view class="plots-title">剧情介绍</view>
+			<view class="plots-desc">{{trailerInfo.plotDesc}}</view>
 		</view>
 	</view>
 </template>
 
 <script>
 	import common from "../../common/common.js"
+	import trailerStars from "../../components/trailerStars.vue"
 	export default {
+		components:{trailerStars},
 		data() {
 			return {
 				trailerInfo:{}
