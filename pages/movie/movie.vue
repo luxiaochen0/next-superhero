@@ -50,7 +50,10 @@
 		components:{trailerStars},
 		data() {
 			return {
-				trailerInfo:{}
+				trailerInfo:{},
+				plotPicsArray:[],
+				directorArray:[],
+				actorArray:[]
 			}
 		},
 		onLoad(params) {
@@ -62,7 +65,7 @@
 			})
 			
 			var serverUrl=common.serverUrl;
-			//查询猜你喜欢
+			//查询
 			uni.request({
 			    url: serverUrl+'/search/trailer', 
 			    method:"GET",
@@ -73,9 +76,39 @@
 						var trailerInfo=res.data.data;
 						this.trailerInfo=trailerInfo;
 						
+						var plotPicsArray=JSON.parse(trailerInfo.plotPics)
+						this.plotPicsArray=plotPicsArray
 					}
 			    },complete() {
 					uni.hideLoading();
+			    }
+			});
+			
+			//获取导演
+			uni.request({
+			    url: serverUrl+'/search/staff', 
+			    method:"GET",
+				data:{id:trailerId,role:1},
+				success: (res) => {//箭头函数不需要_this
+			        //console.log(res.data);
+					if(res.data.code==200){
+						this.directorArray=res.data.data;
+					}
+			    },complete() {
+			    }
+			});
+			
+			//获取演员
+			uni.request({
+			    url: serverUrl+'/search/staff', 
+			    method:"GET",
+				data:{id:trailerId,role:2},
+				success: (res) => {//箭头函数不需要_this
+			        //console.log(res.data);
+					if(res.data.code==200){
+						this.actorArray=res.data.data;
+					}
+			    },complete() {
 			    }
 			});
 		},
