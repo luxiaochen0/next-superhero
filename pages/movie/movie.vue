@@ -40,6 +40,14 @@
 			<view class="plots-title">剧情介绍</view>
 			<view class="plots-desc">{{trailerInfo.plotDesc}}</view>
 		</view>
+		
+		<view class="sroll-block">
+			<view class="plots-title">剧照</view>
+			<scroll-view scroll-x="true" class="scroll-list">
+				<image mode="aspectFill" v-for="(img,index) in plotPicsArray" :src="img" class="plot-image" :key="index"></image>
+			</scroll-view>
+		</view>
+		
 	</view>
 </template>
 

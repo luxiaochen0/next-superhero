@@ -86,3 +86,22 @@
 	margin-top: 10rpx;
 	font-size: 16px;
 }
+
+.sroll-block{
+	background-color: #f7f4f9;
+	padding: 20rpx 40rpx;
+	display: flex;
+	flex-direction: column;
+}
+
+.scroll-list{
+	width: 100%;
+	white-space: nowrap;
+	margin-top: 20rpx;
+}
+
+.plot-image{
+	width: 220rpx;
+	height: 320rpx;
+	margin-right: 10rpx;
+}
