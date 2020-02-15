@@ -5,7 +5,9 @@
 		</view>
 		
 		<view class="movie-info">
-			<image :src="trailerInfo.cover" model="" class="cover"></image>
+			<navigator :url="'../cover/cover?cover='+trailerInfo.cover">
+				<image :src="trailerInfo.cover" model="" class="cover"></image>
+			</navigator>
 			<view class="movie-desc">
 				<view class="title">{{trailerInfo.name}}</view>
 				<view class="basic-info">{{trailerInfo.basicInfo}}</view>
@@ -41,10 +43,48 @@
 			<view class="plots-desc">{{trailerInfo.plotDesc}}</view>
 		</view>
 		
+		<!-- 演职人员 -->
+		<view class="sroll-block">
+			<view class="plots-title">演职人员</view>
+			<scroll-view scroll-x="true" class="scroll-list">
+				<view class="actor-wapper" v-for="(director,index) in directorArray" :key="'director'+index">
+					<image
+						mode="aspectFill" 						
+						:src="director.photo" 
+						class="single-actor" 
+						@click="lookStaffs"
+						:data-staffIndex="index"
+					></image>
+					<view class="actor-name">{{director.name}}</view>
+					<view class="actor-role">{{director.actName}}</view>
+				</view>
+				<view class="actor-wapper" v-for="(actor,index) in actorArray" :key="'actor'+index">
+					<image
+						mode="aspectFill" 
+						:src="actor.photo" 
+						class="single-actor" 
+						@click="lookStaffs"
+						:data-staffIndex="index+directorArray.length"
+					></image>
+					<view class="actor-name">{{actor.name}}</view>
+					<view class="actor-role">{{actor.actName}}</view>
+				</view>
+			</scroll-view>
+		</view>
+		
+		<!-- 剧照 -->
 		<view class="sroll-block">
 			<view class="plots-title">剧照</view>
 			<scroll-view scroll-x="true" class="scroll-list">
-				<image mode="aspectFill" v-for="(img,index) in plotPicsArray" :src="img" class="plot-image" :key="index"></image>
+				<image 
+					mode="aspectFill" 
+					v-for="(img,index) in plotPicsArray" 
+					:key="index"
+					:src="img" 
+					class="plot-image" 
+					@click="lookMe"
+					:data-imgIndex="index"
+				></image>
 			</scroll-view>
 		</view>
 		
@@ -65,6 +105,12 @@
 			}
 		},
 		onLoad(params) {
+			uni.setNavigationBarColor({
+				frontColor:"#ffffff",
+				backgroundColor:"#000000"
+			})
+			
+			
 			var trailerId=params.trailerId;
 			
 			uni.showLoading({
@@ -120,8 +166,36 @@
 			    }
 			});
 		},
+		//仅支持小程序端
+		onShareAppMessage(res) {
+			return {
+				title: this.trailerInfo.name,
+				path:'/pages/movie/movie?trailerId='+this.trailerInfo.id
+			}
+		},
 		methods: {
-			
+			lookMe(e){
+				var imgIndex=e.currentTarget.dataset.imgindex;
+				uni.previewImage({
+					urls:this.plotPicsArray,
+					current:this.plotPicsArray[imgIndex]
+				})
+			},
+			lookStaffs(e){
+				var staffIndex=e.currentTarget.dataset.staffindex;
+				
+				var newStaffArray=this.directorArray.concat(this.actorArray)
+				var urls=[];
+				for(var i in newStaffArray){
+					var temp=newStaffArray[i].photo;
+					urls.push(temp)
+				}
+				
+				uni.previewImage({
+					urls:urls,
+					current:urls[staffIndex]
+				})
+			}
 		}
 	}
 </script>

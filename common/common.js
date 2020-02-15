@@ -1,4 +1,4 @@
-const serverUrl="http://dev.luxiaochen.com/next-superhero-api/web";
+const serverUrl="http://next-superhero-api.luxiaochen.com";
 
 export default{
 	serverUrl

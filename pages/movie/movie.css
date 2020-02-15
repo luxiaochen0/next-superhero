@@ -105,3 +105,28 @@
 	height: 320rpx;
 	margin-right: 10rpx;
 }
+
+/* 演职人员 */
+.actor-wapper{
+	display: inline-block
+}
+
+.single-actor{
+	width: 170rpx;
+	height: 240rpx;
+	margin-right: 10rpx;
+}
+.actor-name{
+	width: 170rpx;
+	text-align: center;
+	font-size: 15px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.actor-role{
+	width: 170rpx;
+	text-align: center;
+	font-size: 13px;
+	color: #A9A9A9;
+}

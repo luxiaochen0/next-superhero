@@ -21,8 +21,18 @@
         }
         ,{
             "path" : "pages/movie/movie",
-            "style" : {}
+            "style": {
+            	"app-plus":{
+            		"titleNView":{
+						"type":"transparent"
+					}
+            	}
+            }
         }
+		,{
+		    "path" : "pages/cover/cover",
+		    "style" : {}
+		}
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
