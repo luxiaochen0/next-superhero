@@ -17,7 +17,14 @@
         }
         ,{
             "path" : "pages/me/me",
-            "style" : {}
+            "style" : {
+				"app-plus":{
+					"titleNView":false
+				},
+				"navigationBarTextStyle": "white",
+				"navigationBarTitleText": "我的",
+				"navigationBarBackgroundColor": "#ffd655"
+			}
         }
         ,{
             "path" : "pages/movie/movie",
@@ -33,6 +40,10 @@
 		    "path" : "pages/cover/cover",
 		    "style" : {}
 		}
+        ,{
+            "path" : "pages/registLogin/registLogin",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
