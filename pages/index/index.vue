@@ -43,7 +43,11 @@
 		</view>
 		
 		<view class="hot-movies page-block">
-			<video :src="trailer.trailer" controls v-for="(trailer,index) in hotTrailerList" :key="index" :poster="trailer.poster" class="hot-movie-single"></video>
+			<video 
+				:id="trailer.id"
+				:data-playingIndex="trailer.id"
+				@play="meIsPlaying"
+				:src="trailer.trailer" controls v-for="(trailer,index) in hotTrailerList" :key="index" :poster="trailer.poster" class="hot-movie-single"></video>
 		</view>
 		
 		<view class="page-block super-hot">
@@ -149,6 +153,11 @@
 		onPullDownRefresh() {
 			this.refresh();
 		},
+		onHide() {
+			if(this.videoContext){
+				this.videoContext.pause();
+			}
+		},
 		methods: {
 			refresh(){
 				uni.showLoading({
@@ -187,6 +196,20 @@
 				}.bind(this), 500);
 				
 				console.log(this.animationDataArr)
+			},
+			meIsPlaying(e){//播放时，暂停其他视频
+				var trailerId="";
+				if(e){
+					trailerId=e.currentTarget.dataset.playingindex
+					this.videoContext=uni.createVideoContext(trailerId)
+				}
+				var hotTrailerList=this.hotTrailerList;
+				for(var i in hotTrailerList){
+					var tempId=hotTrailerList[i].id;
+					if(tempId!=trailerId){
+						uni.createVideoContext(tempId).pause()
+					}
+				}
 			}
 		}
 	}

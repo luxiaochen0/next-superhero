@@ -1,7 +1,13 @@
 <template>
 	<view class="page">
 		<view class="player">
-			<video :src="trailerInfo.trailer" :poster="trailerInfo.poster" class="movie" controls></video>
+			<video 
+				id="myTrailer"
+				muted
+				:src="trailerInfo.trailer" 
+				:poster="trailerInfo.poster" 
+				class="movie" 
+				controls></video>
 		</view>
 		
 		<view class="movie-info">
@@ -165,6 +171,18 @@
 			    },complete() {
 			    }
 			});
+		},
+		onReady(){
+			this.videoContext=uni.createVideoContext('myTrailer');
+			
+		},
+		onHide(){
+			this.videoContext.pause();//暂停播放
+		},
+		onShow(){
+			if(this.videoContext){
+				this.videoContext.play();//继续播放
+			}
 		},
 		//仅支持小程序端
 		onShareAppMessage(res) {
